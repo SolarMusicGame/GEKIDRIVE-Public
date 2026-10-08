@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType><TargetFramework>net48</TargetFramework><LangVersion>latest</LangVersion>
+    <AutomaticallyUseReferenceAssemblyPackages>false</AutomaticallyUseReferenceAssemblyPackages>
+    <FrameworkPathOverride>$(WINDIR)\Microsoft.NET\Framework64\v4.0.30319</FrameworkPathOverride>
+    <GameDir Condition="'$(GameDir)' == ''">$(GEKIDRIVE_GAME_DIR)</GameDir>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../src/GekiDrive/PublicScoreGuard.cs" Link="PublicScoreGuard.cs" />
+    <Reference Include="0Harmony"><HintPath>$(GameDir)/BepInEx/core/0Harmony.dll</HintPath><Private>true</Private></Reference>
+  </ItemGroup>
+</Project>

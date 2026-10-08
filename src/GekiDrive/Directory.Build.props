@@ -1,0 +1,1 @@
+<Project><PropertyGroup><BaseIntermediateOutputPath>obj/public/</BaseIntermediateOutputPath><DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes></PropertyGroup></Project>
