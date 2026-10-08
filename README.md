@@ -13,7 +13,7 @@ Local practice build for ongeki 1.52. Results are shown for the current session 
 ## 快速開始
 
 1. 下載發布附件 `GEKIDRIVE-Public-0.5.1.zip`，關閉遊戲。
-2. 移除舊 `GekiDrive.dll`、`Nageki.dll`、`GekiDrive.AutoZero.dll` 與重複公開版 DLL。
+2. 移除舊 `GekiDrive.Public.dll` 與重複公開版 DLL。
 3. 將 `GekiDrive.Public.dll` 放進 `package/BepInEx/plugins/GekiDrive.Public/`。
 4. 用原有方式啟動，確認公開版插件載入，日誌沒有初始化錯誤。
 5. 設定檔自動建立於 `BepInEx/config/org.gekidrive.ongeki.public.cfg`；修改後按 F6 重新讀取。
