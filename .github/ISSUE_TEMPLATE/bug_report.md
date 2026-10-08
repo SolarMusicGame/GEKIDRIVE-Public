@@ -12,7 +12,7 @@ assignees: ''
 - 遊戲版本／Assembly-CSharp SHA256：
 - BepInEx 版本：
 - 其他插件：
-- 畫面是否顯示 PUBLIC NO SAVE／日誌是否有 PUBLIC SCORE GUARD READY：
+- 公開版是否成功載入／日誌有無初始化錯誤：
 
 ## 重現步驟
 

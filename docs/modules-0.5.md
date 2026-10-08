@@ -1,6 +1,6 @@
 # GEKIDRIVE Public 0.5.1 進階模組說明
 
-適用本機已核對指紋的 ongeki 1.52；這是公開不上傳成績分支，不包含結算全 0 的實驗補丁。完整初次安裝見 [guide.md](guide.md)，固定保存規則見 [no-score-policy.md](no-score-policy.md)。
+適用本機已核對指紋的 ongeki 1.52；這是公開本機練習版本。完整初次安裝見 [guide.md](guide.md)，使用限制見 [public-edition.md](public-edition.md)。
 
 ## 安裝與 config
 
@@ -26,7 +26,7 @@ CRI 原理參考：[官方 time-stretch 文件](https://game.criware.jp/manual/u
 
 畫面提供 Retry / Segment / Reload Chart 虛擬按鈕；`CabinetRetryButton` 可指定原生 GKey 0–9 的實體重試鍵，-1 關閉。該鍵仍有原本遊戲功能。
 重試重新初始化譜面、計分、技能與敵人，再從指定音訊時間開始；不是保存所有引擎物件的任意時間倒帶。起點以前的物件會略過，因此跨越起點的長條／雷射不保證完整還原；請增加 pre-roll，把起點設在長條開始前。
-公開版所有當局保留畫面上的結算，但固定攔截原生結果寫入、play log 與 UpsertUserAll 保存；手動遊玩也適用，與 Training 開關無關。啟用過練習的歌曲會持續使用練習時鐘至結束；要關閉請在歌曲結束後切換。教學／Event 不允許即時重試，Party 不處理重試；本工具供本機單人練習使用。
+公開版遊玩結果僅在當次畫面展示，不會保留到帳號。啟用過練習的歌曲會持續使用練習時鐘至結束；要關閉請在歌曲結束後切換。教學／Event 不允許即時重試，Party 不處理重試；本工具供本機單人練習使用。
 
 `[Visualizer] HitTimingBar` 顯示最近 4 秒擊打的 Early/Late ms，取原生 frameDiff，原生 60-frame 時間單位換算成 ms，並非提升底層判定解析度。MISS 不當作時間偏差。
 `LeverTracking` 的畫面 HUD 顯示拉桿實際位置、中心偏差、安全區及未來兩秒中心路徑。這是疊加參考條，不是重寫原生軌道 mesh；中心也不是所有譜面的唯一最佳路線。
@@ -85,4 +85,4 @@ ID 僅允許英數、`-`、`_`，長度 1–128，credits 1–9999。HTTP 202 �
 ## 驗證狀態與實機檢查
 
 已完成 net35 編譯（0 警告／錯誤）、本機遊戲 DLL 的補丁與 CRI API 靜態檢查；純模組測試涵蓋時鐘、重放損毀／邊界、CRC、credit 持久化與重複交易。本機實際 HTTP/WebSocket 測試涵蓋頁面、快照、來源限制、關閉握手、加點入口轉交與重啟。
-尚未啟動遊戲實測這些新增模組，也沒有硬體或 LINE Pay 端可驗證。請先單獨測試練習 1x 重試 → 0.5x/2x 音訊與譜面同步 → 片段／重載 → 同曲重放，確認結算不保存，再分別開 OBS、橫屏、匯出與設備功能。若失敗，提供該次完整 LogOutput.log、相關 cfg 段落與操作順序。
+尚未啟動遊戲實測這些新增模組，也沒有硬體或 LINE Pay 端可驗證。請先單獨測試練習 1x 重試 → 0.5x/2x 音訊與譜面同步 → 片段／重載 → 同曲重放，再分別開 OBS、橫屏、匯出與設備功能。若失敗，提供該次完整 LogOutput.log、相關 cfg 段落與操作順序。

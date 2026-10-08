@@ -1,5 +1,7 @@
 # 完整使用教學：GEKIDRIVE Public 0.5.1
 
+> **AI 生成・不承諾維護**：本教學及本專案程式皆由 AI 生成與整理，按現況分享。發布者不承諾維護、修復、更新、相容性或技術支援，Issue／PR 可能不處理。使用前請自行評估、備份與驗證。完整聲明見 [AI-NOTICE.md](../AI-NOTICE.md)。
+
 ## 1. 準備環境
 
 本模組不是遊戲本體。需要既有 ongeki 1.52、Unity 5.6.4、64-bit BepInEx 5.4.23.2 與能正常啟動的環境；不包含遊戲 DLL、歌曲或譜面。
@@ -11,18 +13,18 @@
 1. 關閉遊戲，下載 `GEKIDRIVE-Public-0.5.1.zip`，解壓縮。
 2. 找到 `mu3.exe` 所在的 `package` 目錄；確認同層已有 `BepInEx`。
 3. 建立 `BepInEx/plugins/GekiDrive.Public/`，把 `GekiDrive.Public.dll` 放進去。
-4. 移除 plugins 中的 `GekiDrive.dll`、`Nageki.dll`、`GekiDrive.AutoZero.dll` 與重複公開版 DLL。自用版與公開版有不同 ID，但不能同時使用。
-5. 以原本可用的啟動方式開遊戲。先檢查 `BepInEx/LogOutput.log` 有 `PUBLIC SCORE GUARD READY`，畫面有 `GEKIDRIVE PUBLIC NO SAVE`，再開始測試。
+4. 移除 plugins 中的 `GekiDrive.dll`、`Nageki.dll`、`GekiDrive.AutoZero.dll` 與重複公開版 DLL。勿和其他版本混用。
+5. 以原本可用的啟動方式開遊戲，先檢查 `BepInEx/LogOutput.log` 確認公開版已載入且沒有初始化錯誤，再開始測試。
 6. 第一次啟動會生成 `BepInEx/config/org.gekidrive.ongeki.public.cfg`。不必手動建立空 cfg。
 
-更新時關閉遊戲、替換公開版 DLL，保留公開版 cfg。移除時關閉遊戲、移走 DLL，原生保存行為恢復；公開版的 cfg 與輸出檔可以自行保留。
-`PUBLIC GUARD FAILED` 或沒看到公開版 banner 時請退出遊戲，不要把它當作已禁止保存。其他功能安裝失敗但保護已成功時，日誌仍會分別記錄保護與功能狀態。
+更新時關閉遊戲、替換公開版 DLL，保留公開版 cfg。移除時關閉遊戲、移走 DLL；cfg 與輸出檔可以自行保留。
+`PUBLIC GUARD FAILED` 或沒看到公開版載入資訊時請退出遊戲，並查看日誌中的初始化錯誤。
 
 ## 3. config 與快捷鍵
 
 使用文字編輯器打開公開版 cfg。每一項附有用途、範圍与預設值；布林值用 `true` / `false`，秒與速度可用小數，Windows 路徑不用加引號。
 修改後保存檔案，在遊戲內按 F6 重新讀取；OBS、序列埠與顯示設定會重建。重放／影片輸出的起始設定在下一次開始歌曲或重試生效。
-範例 `org.gekidrive.ongeki.public.example.cfg` 是完整預設參考。已有 cfg 請逐項合併，以免覆蓋個人設定。公開版不能透過 cfg 恢復成績提交。
+範例 `org.gekidrive.ongeki.public.example.cfg` 是完整預設參考。已有 cfg 請逐項合併，以免覆蓋個人設定。
 
 | 預設按鍵 | 功能 | config 項目 |
 | --- | --- | --- |
@@ -46,7 +48,7 @@
 ## 4. 自動遊玩、幀率與 GP
 
 F8 或 `[AutoPlay] Enabled=true` 啟用自動。FollowTrack 跟隨軌道中心；TheoreticalJudgments 送入最佳判定；CollectBells 收鈴鐺；AvoidBullets 攔截彈幕與長條雷射傷害；MaxOverDamage 填滿原生 Boss 傷害階梯。
-上述子項只有主開關啟用時介入。關閉不會撤銷本局已得分數與傷害。所有歌曲仍採公開版不保存／不提交規則。
+上述子項只有主開關啟用時介入。關閉不會撤銷本局已得分數與傷害。公開版遊玩結果不會保留到帳號。
 
 預設不鎖 60 FPS。要鎖 60：`[Display] EnableFrameControl=true`、`TargetFps=60`，按 F6；F7 可切換。支援 30–240 的目標值，實際 FPS 仍受硬體與遊戲負載影響，高 FPS 對遊戲同步需自行實測。
 GP 畫面先用左右鍵選方案，再 Enter。方案 unavailable 代表原生流程不允許。要固定本機 GP：
@@ -112,8 +114,8 @@ TrackCrop、LeftPanelCrop、RightPanelCrop 使用 `x,y,w,h` 的 0–1 UV，左�
 | --- | --- |
 | 沒有公開版 banner | 查看 LogOutput.log 是否載入 Public DLL、有沒有重複／衝突插件，請先退出遊戲 |
 | PUBLIC GUARD FAILED | 查看遊戲指紋與完整例外；不支援的 DLL 不安裝 hook |
-| F6 設定無效 | 確認編輯的是 public cfg，不是自用版的 org.nageki.ongeki.cfg |
-| 新成績／卡牌進度不保留 | 公開版固定阻擋結果寫入和 UpsertUserAll，这是預期行為 |
+| F6 設定無效 | 確認編輯的是 org.gekidrive.ongeki.public.cfg |
+| 新成績／卡牌進度不保留 | 公開版供本機練習，遊玩結果與其他帳號變更可能不保留，這是使用限制 |
 | 首次載入仍慢 | 第一次建立譜面標頭快取，下次再觀察 cache HIT；不保證所有開機流程加速 |
 | GP 仍不能購入 | 檢查可用 credit／方案狀態，附完整畫面和 GP dialog 日誌 |
 | 重放遭拒絕 | 確認同一遊戲指紋、譜面內容、歌曲 ID、難度與有效檔案 |

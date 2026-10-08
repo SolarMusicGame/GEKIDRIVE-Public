@@ -40,8 +40,10 @@ $config = Join-Path $stage 'examples\org.gekidrive.ongeki.public.example.cfg'
 Copy-Item -LiteralPath (Join-Path $artifact 'GekiDrive.Public.dll') -Destination $stage -Force
 Copy-Item -LiteralPath (Join-Path $root 'README.md') -Destination $stage -Force
 Copy-Item -LiteralPath (Join-Path $root 'CONTRIBUTING.md') -Destination $stage -Force
+Copy-Item -LiteralPath (Join-Path $root 'AI-NOTICE.md') -Destination $stage -Force
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'encode-video.ps1') -Destination $stage -Force
-foreach ($name in @('modules-0.5.md', 'led-protocol.md', 'guide.md', 'no-score-policy.md', 'release-0.5.1-public.md', 'validation.md')) { Copy-Item -LiteralPath (Join-Path $root "docs\$name") -Destination (Join-Path $stage 'docs') -Force }
+foreach ($name in @('modules-0.5.md', 'led-protocol.md', 'guide.md', 'public-edition.md', 'release-0.5.1-public.md', 'validation.md')) { Copy-Item -LiteralPath (Join-Path $root "docs\$name") -Destination (Join-Path $stage 'docs') -Force }
+if (Test-Path -LiteralPath (Join-Path $stage 'docs\no-score-policy.md')) { Remove-Item -LiteralPath (Join-Path $stage 'docs\no-score-policy.md') }
 Get-FileHash -LiteralPath (Join-Path $stage 'GekiDrive.Public.dll') -Algorithm SHA256 | ForEach-Object { [System.IO.File]::WriteAllText((Join-Path $stage 'SHA256.txt'), $_.Hash.ToLowerInvariant() + '  GekiDrive.Public.dll' + [Environment]::NewLine) }
 $zip = Join-Path $artifact "GEKIDRIVE-Public-$version.zip"
 Compress-Archive -Path (Join-Path $stage '*') -DestinationPath $zip -Force
