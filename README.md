@@ -79,3 +79,6 @@ GP 固定值可在 `[GP] LockValue=true`、`LockedValue=900` 設定。一般功�
 ## 參考
 
 [AquaMai](https://github.com/MuNET-OSS/AquaMai) 與 [AppleChu](https://github.com/MuNET-OSS/AppleChu) 提供模組分離、設定與版本相容性設計參考。本專案為針對本機 ongeki DLL 的獨立實作，沒有使用其他遊戲補丁位址。發布包不附帶上述參考專案或其原始碼。
+## 作者的話
+沒有手台測視過加油
+6767
